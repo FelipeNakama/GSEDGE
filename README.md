@@ -64,4 +64,4 @@ O sistema lê a temperatura da amostra de sangue por meio do sensor TMP36. Essa 
 Os limites de temperatura podem ser ajustados no código conforme necessário, atualmente estão configurados entre 2°C e 6°C, que é range ideal de temperatura para o armazenamento de amostras de sangue coletadas
 
 ## Simulação do Projeto:
-https://www.tinkercad.com/things/eoummDj0RCY-funky-crift-albar/editel?sharecode=DDANvb6BmT7D1-F63Q7xPVU05x3qJSF1rtfry0cHV6E&sharecode=PdKDfr6F6L1lwXy-DQ-qpUBshbgZYC2GMviFACd6YJg
+https://www.tinkercad.com/things/eoummDj0RCY-gs-medidor-de-temperatura-amostra-de-sangue
