@@ -1,0 +1,71 @@
+#include <LiquidCrystal.h>
+
+// Definindo as variáveis e declarando os pinos onde cada um irá ser conectado
+const int pinoSensorTemperatura = A0;
+const int ledVermelho = 4;
+const int ledVerde = 3;
+const int ledAzul = 2;
+
+// Definindo os limites de temperatura em Celsius
+const int limiteBaixoCelsius = 2;
+const int limiteAltoCelsius = 6;
+
+// Configurando o LCS com suas portas de entrada no arduino
+LiquidCrystal lcd(12, 11, 10, 9, 8, 7);
+
+// Inicia a tela LCD, e configura os pinos dos LEDs como saídas, além de iniciar o monitor serial
+void setup() {
+  lcd.begin(16, 2);
+  pinMode(ledVermelho, OUTPUT);
+  pinMode(ledAzul, OUTPUT);
+  pinMode(ledVerde, OUTPUT);
+
+  Serial.begin(9600);
+}
+
+//
+void loop() {
+  // Permite a leitura da voltagem no pino A0, onde o pinoSensorTemperatura está conectado.
+  int leituraAnalogica = analogRead(pinoSensorTemperatura);
+
+  // Converte a leitura analógica para Celsius de acordo com as especificidades do sensor TMP36
+  float tensao = leituraAnalogica * (5.0 / 1023.0);
+  float temperaturaCelsius = (tensao - 0.5) * 100.0;
+
+  // Imprime a leitura analógica e a temperatura no monitor serial
+  Serial.print("Leitura Analogica: ");
+  Serial.print(leituraAnalogica);
+  Serial.print(", Temperatura (C): ");
+  Serial.println(temperaturaCelsius);
+
+  // Limpa o LCD e mostra a temperatura na primeira linha do LCD
+  lcd.clear();
+  lcd.setCursor(0, 0);
+  lcd.print("Temp: ");
+  lcd.print(temperaturaCelsius);
+  lcd.print("C");
+
+  // Adiciona mensagens na segunda linha do LCD e liga os LEDs com base nas faixas de temperatura
+  lcd.setCursor(0, 1);
+  if (temperaturaCelsius < limiteBaixoCelsius) {
+    lcd.print("Temp Baixa     ");
+    ligarLed(ledAzul);
+  } else if (temperaturaCelsius >= limiteBaixoCelsius && temperaturaCelsius <= limiteAltoCelsius) {
+    lcd.print("Temp Adequada  ");
+    ligarLed(ledVerde);
+  } else {
+    lcd.print("Temp Alta      ");
+    ligarLed(ledVermelho);
+  }
+
+  delay(3000);
+}
+
+// Define a função ligarLed, que garante que apenas 1 led acenda por vez
+void ligarLed(int led) {
+  digitalWrite(ledVerde, LOW);
+  digitalWrite(ledAzul, LOW);
+  digitalWrite(ledVermelho, LOW);
+
+  digitalWrite(led, HIGH);
+}
