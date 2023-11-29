@@ -65,3 +65,6 @@ Os limites de temperatura podem ser ajustados no código conforme necessário, a
 
 ## Simulação do Projeto:
 https://www.tinkercad.com/things/eoummDj0RCY-gs-medidor-de-temperatura-amostra-de-sangue
+
+## Link do Video:
+https://youtu.be/IR592k9YSHE
